@@ -1,5 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
-import { IConfig, ConfigToken } from "../app.module";
+import { IConfig } from "../app.module";
+import { ConfigToken } from "../token";
 
 export type ViewSize = "small" | "medium" | "large";
 
