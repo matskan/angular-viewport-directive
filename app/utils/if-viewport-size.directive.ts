@@ -21,7 +21,6 @@ export class IfViewportSizeDirective implements OnInit, OnDestroy {
 
   #viewSize: ViewSize; 
   @Input("ifViewportSize") set size(value: ViewSize) {
-    console.log("check");
     this.check(value);
     this.#viewSize = value;
   }
@@ -32,7 +31,6 @@ export class IfViewportSizeDirective implements OnInit, OnDestroy {
   ngOnInit() {
     this.resizeObservable$ = fromEvent(window, "resize");
     this.resizeSubscription$ = this.resizeObservable$.subscribe(event => {
-      console.log("resize", event);
       this.check(this.#viewSize);
     });
   }

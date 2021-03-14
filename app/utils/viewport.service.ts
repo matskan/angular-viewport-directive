@@ -11,7 +11,9 @@ export class ViewportService {
   constructor(@Inject(ConfigToken) config: IConfig) {
     this.config = config;
     this.validator = {
-      small: value => value < config.medium,
+      small: value => {
+        return value < config.medium;
+      },
       medium: value => value >= config.medium && value < config.large,
       large: value => value >= config.large
     };

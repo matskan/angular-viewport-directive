@@ -15,7 +15,7 @@ export interface IConfig {
 
 const config: IConfig = Object.freeze({
   large: 1240,
-  medium: 1024
+  medium: 768
 });
 
 @NgModule({
