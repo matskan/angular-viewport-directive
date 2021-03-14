@@ -21,8 +21,8 @@ export class IfViewportSizeDirective implements OnInit, OnDestroy {
 
   #viewSize: ViewSize; 
   @Input("ifViewportSize") set size(value: ViewSize) {
-    this.check(value);
     this.#viewSize = value;
+    this.check(value);
   }
 
   resizeObservable$: Observable<Event>;
