@@ -16,7 +16,7 @@ const config: IConfig = {
   medium: 1024
 };
 
-const ConfigToken = new InjectionToken<IConfig>("config");
+export const ConfigToken = new InjectionToken<IConfig>("config");
 
 @NgModule({
   imports: [BrowserModule, FormsModule],

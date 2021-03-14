@@ -1,6 +1,22 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
+import { IConfig, ConfigToken } from "../app.module";
+
+export type ViewSize = "small" | "medium" | "large";
 
 @Injectable()
 export class ViewportService {
-  constructor() {}
+  config: IConfig;
+  validator: Record<ViewSize, (ViewSize) => boolean>;
+  constructor(@Inject(ConfigToken) config: IConfig) {
+    this.config = config;
+    this.validator = {
+      small: value => value < config.medium,
+      medium: value => value >= config.medium && value < config.large,
+      large: value => value >= config.large
+    };
+  }
+
+  get size() {
+    return window.innerWidth;
+  }
 }
