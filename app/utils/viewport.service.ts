@@ -7,7 +7,7 @@ export type ViewSize = "small" | "medium" | "large";
 @Injectable()
 export class ViewportService {
   config: IConfig;
-  validator: Record<ViewSize, (ViewSize) => boolean>;
+  validator: Record<ViewSize, (value: number) => boolean>;
   constructor(@Inject(ConfigToken) config: IConfig) {
     this.config = config;
     this.validator = {
