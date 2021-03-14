@@ -42,11 +42,11 @@ export class IfViewportSizeDirective implements OnInit, OnDestroy {
   }
 
   check(value: ViewSize) {
+    this.viewContainer.clear();
     const isVisible = this.viewport.isVisible(value);
     if (isVisible) {
       this.viewContainer.createEmbeddedView(this.templateRef);
       return;
     }
-    this.viewContainer.clear();
   }
 }
