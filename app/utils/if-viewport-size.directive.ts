@@ -1,32 +1,43 @@
 import {
-  AfterContentInit,
   Directive,
-  HostListener,
   Input,
+  OnDestroy,
+  OnInit,
   TemplateRef,
   ViewContainerRef
 } from "@angular/core";
+import { fromEvent, Observable, Subscription } from "rxjs";
 import { ViewportService, ViewSize } from "./viewport.service";
 
 @Directive({
   selector: "[ifViewportSize]"
 })
-export class IfViewportSizeDirective {
+export class IfViewportSizeDirective implements OnInit, OnDestroy {
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
     private viewport: ViewportService
   ) {}
 
-  @Input() set ifViewportSize(value: ViewSize) {
+  @Input("ifViewportSize") set size(value: ViewSize) {
     console.log("check");
     this.check(value);
   }
 
-  @HostListener("document:resize", ["$event"])
-  onResize() {
-    console.log("RESIZE");
-    this.check(this.ifViewportSize);
+  resizeObservable$: Observable<Event>;
+  resizeSubscription$: Subscription;
+
+  ngOnInit() {
+    console.log("on init");
+    this.resizeObservable$ = fromEvent(window, "resize");
+    this.resizeSubscription$ = this.resizeObservable$.subscribe(event => {
+      console.log("resize", event);
+      this.check(this.size);
+    });
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription$.unsubscribe();
   }
 
   check(value: ViewSize) {
