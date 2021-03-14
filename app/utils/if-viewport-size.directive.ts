@@ -19,17 +19,15 @@ export class IfViewportSizeDirective {
   ) {}
 
   @Input() set ifViewportSize(value: ViewSize) {
+    console.log("check");
     this.check(value);
   }
 
-  @HostListener("window:resize", ["$event"])
+  @HostListener("document:resize", ["$event"])
   onResize() {
+    console.log("RESIZE");
     this.check(this.ifViewportSize);
   }
-
-  // ngAfterContentInit() {
-  //   this.check(this.ifViewportSize);
-  // }
 
   check(value: ViewSize) {
     const isVisible = this.viewport.isVisible(value);
