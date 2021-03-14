@@ -19,4 +19,9 @@ export class ViewportService {
   get size() {
     return window.innerWidth;
   }
+
+  isVisible(value: ViewSize) {
+    const result = this.validator[value](this.size);
+    return result;
+  }
 }
